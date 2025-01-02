@@ -8,16 +8,30 @@ app = FastAPI()
 # Include Routers
 app.include_router(example.router)
 
+
 @app.get('/')
 async def root():
     return {'message': 'FastAPI Server is Running'}
 
-    
+
 async def start_api():
-    config = Config(app, host=API_HOST, port=API_PORT)
+    config = Config(
+        app=app,
+        host=API_HOST,
+        port=API_PORT,
+    )
     server = Server(config)
-    await server.serve()
+    try:
+        await server.serve()
+    except KeyboardInterrupt:
+        print("Shutting down FastAPI server gracefully.")
+    except Exception as e:
+        print(f"Failed to start FastAPI server: {e}")
+
 
 if __name__ == "__main__":
     import asyncio
-    asyncio.run(start_api())
+    try:
+        asyncio.run(start_api())
+    except KeyboardInterrupt:
+        print("FastAPI server stopped manually.")

@@ -1,2 +1,3 @@
 # my-discord-bot-boilerplate
-A scalable and maintainable python discord bot boilerplate, run asynchronously with a FastAPI server
+This boilerplate is designed for scalability, maintainability, and seamless integration between Discord Bot and FastAPI.
+- This include slash commands in cogs
