@@ -1,10 +1,14 @@
 from logging.config import fileConfig
-
+import os
+try:
+    from dotenv import load_dotenv
+except:
+    print("runninng in production")
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-
+load_dotenv("./.env")
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -18,7 +22,13 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from db.models import Base  # Adjust import based on your project structure
+from db.models import Base
+DATABASE_URL = os.getenv("POSTGRES_URL")
+
+if DATABASE_URL is None:
+    raise ValueError("DATABASE_URL environment variable is not set!")
+
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
