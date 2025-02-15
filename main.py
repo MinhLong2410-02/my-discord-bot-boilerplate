@@ -2,6 +2,8 @@ from bot import run_bot
 from asyncio import create_task, gather, run
 from api import start_api
 import asyncio
+from db.database import engine
+from db.models import Base
 
 async def main():
     api_task = create_task(start_api())
@@ -11,4 +13,5 @@ async def main():
 if __name__ == '__main__':
     # loop = asyncio.get_event_loop()
     # loop.run_until_complete(main())
+    Base.metadata.create_all(bind=engine)
     run(main())

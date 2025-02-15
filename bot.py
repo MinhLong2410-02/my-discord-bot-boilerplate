@@ -64,4 +64,7 @@ async def main():
     await asyncio.gather(bot_task)
 
 if __name__ == '__main__':
+    from db.database import engine
+    from db.models import Base
+    Base.metadata.create_all(bind=engine)
     asyncio.run(main())

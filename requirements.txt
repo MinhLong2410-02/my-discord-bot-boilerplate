@@ -3,3 +3,5 @@ pymongo
 psycopg2-binary
 fastapi
 uvicorn
+alembic
+sqlalchemy

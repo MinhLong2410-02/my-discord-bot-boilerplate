@@ -1,0 +1,5 @@
+Generic single-database configuration.
+
+1. Modify your SQLAlchemy models (models.py).
+2. Run alembic revision --autogenerate -m "describe changes" to detect model changes.
+3. Run alembic upgrade head to apply the migrations.
